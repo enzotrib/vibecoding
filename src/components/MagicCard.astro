@@ -1,0 +1,132 @@
+---
+interface Props {
+  class?: string;
+  gradientSize?: number;
+  gradientFrom?: string;
+  gradientTo?: string;
+  gradientColor?: string;
+  gradientOpacity?: number;
+}
+
+const {
+  class: className = '',
+  gradientSize = 250,
+  gradientFrom = 'rgba(120, 153, 255, 0.4)',
+  gradientTo = 'rgba(108, 103, 255, 0.4)',
+  gradientColor = 'rgba(120, 153, 255, 0.08)',
+  gradientOpacity = 1,
+} = Astro.props;
+---
+
+<div
+  class:list={['magic-card group', className]}
+  data-gradient-size={gradientSize}
+  style={`
+    --gradient-from: ${gradientFrom};
+    --gradient-to: ${gradientTo};
+    --gradient-color: ${gradientColor};
+    --gradient-opacity: ${gradientOpacity};
+    --gradient-size: ${gradientSize}px;
+  `}
+>
+  <div class="magic-card-bg"></div>
+  <div class="magic-card-border"></div>
+  <div class="magic-card-overlay"></div>
+  <div class="magic-card-content">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .magic-card {
+    position: relative;
+    border-radius: var(--radius-card, 14px);
+    overflow: hidden;
+    isolation: isolate;
+    background: transparent;
+    --x: -1000px; 
+    --y: -1000px;
+  }
+
+  .magic-card-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: var(--surface-card, rgba(13, 18, 33, 0.82));
+    border-radius: inherit;
+  }
+
+  .magic-card-border {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: radial-gradient(
+      var(--gradient-size) circle at var(--x) var(--y),
+      var(--gradient-from),
+      var(--gradient-to),
+      transparent 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .magic-card:hover .magic-card-border {
+    opacity: 1;
+  }
+
+  .magic-card-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: inherit;
+    background: radial-gradient(
+      var(--gradient-size) circle at var(--x) var(--y),
+      var(--gradient-color),
+      transparent 100%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
+  .magic-card:hover .magic-card-overlay {
+    opacity: var(--gradient-opacity);
+  }
+
+  .magic-card-content {
+    position: relative;
+    z-index: 3; /* Always on top of border and overlay */
+    height: 100%;
+    pointer-events: auto;
+  }
+</style>
+
+<script>
+  function setupMagicCards() {
+    const cards = document.querySelectorAll('.magic-card');
+    cards.forEach((card) => {
+      card.addEventListener('mousemove', (e: any) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        (card as HTMLElement).style.setProperty('--x', `${x}px`);
+        (card as HTMLElement).style.setProperty('--y', `${y}px`);
+      });
+
+      card.addEventListener('mouseleave', () => {
+        (card as HTMLElement).style.setProperty('--x', '-1000px');
+        (card as HTMLElement).style.setProperty('--y', '-1000px');
+      });
+    });
+  }
+
+  setupMagicCards();
+  document.addEventListener('astro:page-load', setupMagicCards);
+</script>

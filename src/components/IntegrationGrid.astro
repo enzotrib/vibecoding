@@ -1,0 +1,30 @@
+---
+const tiles = [
+  'empty', 'empty', 'empty', 'empty',
+  'empty', 'zap', 'asterisk', 'empty',
+  'empty', 'openai', 'network', 'empty',
+  'empty', 'empty', 'empty', 'empty',
+];
+---
+
+<aside class="hero-panel" aria-label="Connected tool visual">
+  <div class="integration-grid">
+    {tiles.map((tile) => (
+      <div class:list={['tile', tile === 'empty' && 'empty', tile !== 'empty' && 'tile-hot']}>
+        {tile === 'zap' && (
+          <svg class="zap" viewBox="0 0 72 72" aria-hidden="true"><path d="M42 4 11 42h25l-6 26 31-39H37z"></path></svg>
+        )}
+        {tile === 'asterisk' && (
+          <svg class="asterisk" viewBox="0 0 72 72" aria-hidden="true"><path d="M36 9v54M17 17l38 38M63 36H9M55 17 17 55"></path></svg>
+        )}
+        {tile === 'openai' && (
+          <svg viewBox="0 0 72 72" aria-hidden="true"><path d="M28 16c8-8 24-3 26 8 10 3 12 18 3 24 2 11-11 20-20 14-9 6-22-2-20-14-9-6-7-21 3-24 1-4 4-7 8-8z"></path><path d="M24 26 45 38M48 26 27 39M25 48V25l20-11M47 24v24L27 59"></path></svg>
+        )}
+        {tile === 'network' && (
+          <svg class="network" viewBox="0 0 72 72" aria-hidden="true"><circle cx="18" cy="18" r="6"></circle><circle cx="54" cy="18" r="6"></circle><circle cx="36" cy="54" r="6"></circle><circle cx="54" cy="48" r="6"></circle><path d="M22 22 33 49M49 22 39 49M42 53h6"></path></svg>
+        )}
+      </div>
+    ))}
+  </div>
+  <p class="hero-panel-copy">I connect tools, automate workflows and ship products that deliver real impact.</p>
+</aside>

@@ -1,0 +1,14 @@
+---
+interface Props {
+  titleStart: string;
+  titleAccent: string;
+  text: string;
+}
+
+const { titleStart, titleAccent, text } = Astro.props;
+---
+
+<div class="section-heading">
+  <h2>{titleStart} <span class="gradient-text">{titleAccent}</span></h2>
+  <p>{text}</p>
+</div>

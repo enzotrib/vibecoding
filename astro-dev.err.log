@@ -1,0 +1,4 @@
+listen UNKNOWN: unknown error 127.0.0.1:4322
+  [1mStack trace:[22m
+[2m    at Server.setupListenHandle [as _listen2] (node:net:1915:21)
+    at node:net:2203:7[22m

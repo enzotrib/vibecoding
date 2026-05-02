@@ -1,0 +1,23 @@
+---
+import BrandMark from './BrandMark.astro';
+
+const links = [
+  { label: 'Projects', href: '#builds' },
+  { label: 'Stack', href: '#stack' },
+  { label: 'Process', href: '#process' },
+  { label: 'About', href: '#about' },
+];
+---
+
+<header class="header page">
+  <nav class="nav" aria-label="Primary navigation">
+    <a class="brand" href="#" aria-label="VibeCoding home">
+      <BrandMark />
+      <span>VibeCoding</span>
+    </a>
+    <div class="nav-links">
+      {links.map((link) => <a href={link.href}>{link.label}</a>)}
+    </div>
+    <a class="nav-cta" href="#contact">Let's build</a>
+  </nav>
+</header>

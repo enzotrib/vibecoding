@@ -1,0 +1,48 @@
+---
+const tileCount = 144;
+const hotTiles = new Set([18, 31, 42, 55, 69, 82]); // Very few hot tiles
+---
+
+<div class="background-grid" aria-hidden="true">
+  <div class="grid-container">
+    {
+      Array.from({ length: tileCount }).map((_, index) => (
+        <div class:list={["grid-tile", hotTiles.has(index) && "is-hot"]} />
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .background-grid {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 16px;
+    padding: 20px;
+    opacity: 0.6; /* Very subtle */
+  }
+
+  .grid-tile {
+    aspect-ratio: 1;
+    border-radius: 8px;
+    border: 1px solid rgba(111, 132, 171, 0.1);
+    background: rgba(13, 18, 33, 0.2);
+  }
+
+  .grid-tile.is-hot {
+    background: radial-gradient(
+      circle at center,
+      rgba(74, 96, 255, 0.15),
+      transparent
+    );
+    border-color: rgba(74, 96, 255, 0.2);
+  }
+</style>

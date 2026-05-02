@@ -1,0 +1,217 @@
+---
+import Icon from './Icon.astro';
+import SectionHeading from './SectionHeading.astro';
+import MagicCard from './MagicCard.astro';
+import orbyImage from '../assets/orby.webp';
+import picstreamsImage from '../assets/picstreams.webp';
+import translateImage from '../assets/traslate-app.webp';
+import arranzImage from '../assets/arranz-guitars.webp';
+
+const builds = [
+  {
+    title: 'Orby',
+    description: 'Agente interactivo de inteligencia artificial nativo de voz, con integración de herramientas y memoria persistente.',
+    image: orbyImage,
+    url: 'https://orby-ai.up.railway.app/',
+    badge: { text: 'Concept', type: 'concept' },
+    tags: ['AI Voice', 'Persistent Memory', 'Tool Use'],
+    meta: [
+      ['clock', '', 'Built in: 2 weeks'],
+      ['check', 'green', 'Outcome: Fully functional voice agent'],
+    ],
+  },
+  {
+    title: 'PicStreams',
+    description: 'Aplicación para compartir selfies en tiempo real en pantallas gigantes de eventos, creando experiencias interactivas.',
+    image: picstreamsImage,
+    url: 'https://picstreams.com/',
+    badge: { text: 'Live', type: 'live' },
+    tags: ['Real-time', 'WebSockets', 'Events'],
+    meta: [
+      ['sparkle', 'violet', 'Focus: Scale + Latency'],
+      ['diamond', 'blue', 'Production Ready'],
+    ],
+  },
+  {
+    title: 'Translate-app',
+    description: 'Traducción de audio y fotos en tiempo real con soporte para más de 48 idiomas y latencia mínima.',
+    image: translateImage,
+    url: '#',
+    badge: { text: 'Concept', type: 'concept' },
+    tags: ['Real-time Translation', 'Audio Processing', 'Computer Vision'],
+    meta: [
+      ['sparkle', 'violet', 'Focus: Accuracy + Speed'],
+      ['clock', '', 'Built in: 3 weeks'],
+    ],
+  },
+  {
+    title: 'Arranz Guitars',
+    description: 'Landing page premium para Pablo Arranz, reconocido Luthier, con un diseño enfocado en el detalle y la artesanía.',
+    image: arranzImage,
+    url: 'https://arranz-guitars.vercel.app/',
+    badge: { text: 'In Progress', type: 'in-progress' },
+    tags: ['Astro', 'UI/UX', 'Performance'],
+    meta: [
+      ['sparkle', 'violet', 'Focus: Aesthetic + SEO'],
+      ['check', 'green', 'Outcome: High-converting landing'],
+    ],
+  },
+];
+---
+
+<section class="section builds" id="builds">
+  <SectionHeading titleStart="Selected" titleAccent="builds" text="Real projects. Real results." />
+  <div class="build-grid">
+    {builds.map((build) => (
+      <MagicCard class="build-card-magic">
+        <a href={build.url || '#'} target="_blank" rel="noopener noreferrer" class="build-card-inner">
+          <div class="build-visual">
+            {build.image ? (
+              <div class="img-container">
+                <img src={build.image.src} alt={build.title} class="build-img" />
+                {build.badge && (
+                  <span class:list={['badge', build.badge.type]}>
+                    {(build.badge.type === 'live' || build.badge.type === 'in-progress') && <span class="dot"></span>}
+                    {build.badge.text}
+                  </span>
+                )}
+              </div>
+            ) : (
+              <div class:list={['mock', build.mockClass]} aria-hidden="true"></div>
+            )}
+          </div>
+          <div class="build-body">
+            <h3>{build.title}</h3>
+            <p>{build.description}</p>
+            <div class="tags">
+              {build.tags.map((tag) => <span class="tag">{tag}</span>)}
+            </div>
+          </div>
+          <div class="build-meta">
+            {build.meta.map(([icon, color, label]) => (
+              <span class="meta-item"><Icon name={icon} class={`icon ${color}`} />{label}</span>
+            ))}
+          </div>
+        </a>
+      </MagicCard>
+    ))}
+  </div>
+</section>
+
+<style>
+  /* Base Styles (Desktop) */
+  .build-card-inner {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 20px;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+  }
+  .build-card-magic {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+  .build-visual {
+    padding: 24px 0 24px 24px;
+  }
+  .img-container {
+    position: relative;
+    width: 100%;
+    height: 140px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+  .build-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .build-card-inner:hover .build-img {
+    transform: scale(1.05);
+  }
+  
+  .badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    backdrop-filter: blur(4px);
+  }
+  
+  .badge.concept {
+    background: rgba(141, 92, 255, 0.25);
+    color: #b592ff;
+    border: 1px solid rgba(141, 92, 255, 0.3);
+  }
+  
+  .badge.live {
+    background: rgba(59, 213, 132, 0.25);
+    color: #3bd584;
+    border: 1px solid rgba(59, 213, 132, 0.3);
+  }
+
+  .badge.in-progress {
+    background: rgba(255, 138, 91, 0.25);
+    color: #ff8a5b;
+    border: 1px solid rgba(255, 138, 91, 0.3);
+  }
+  
+  .dot {
+    width: 6px;
+    height: 6px;
+    background: currentColor;
+    border-radius: 50%;
+    box-shadow: 0 0 10px currentColor;
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.4; }
+    100% { opacity: 1; }
+  }
+
+  .build-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 26px;
+  }
+
+  /* Responsive Styles (Mobile) */
+  @media (max-width: 1120px) {
+    .build-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .build-card-inner {
+      grid-template-columns: 1fr;
+    }
+    .build-visual {
+      padding: 24px !important; /* Forces symmetrical padding on mobile */
+    }
+    .img-container {
+      height: 220px !important; /* Forces 220px height on mobile */
+    }
+    .build-body {
+      padding: 24px !important;
+    }
+    .build-meta {
+      padding: 18px 24px !important;
+    }
+  }
+</style>

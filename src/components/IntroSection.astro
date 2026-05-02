@@ -1,0 +1,75 @@
+---
+import Icon from './Icon.astro';
+import SectionHeading from './SectionHeading.astro';
+---
+
+<section class="section integrations-strip" id="integrations">
+  <div class="container">
+    <SectionHeading 
+      titleStart="My development" 
+      titleAccent="ecosystem." 
+      text="I leverage the best tools in the industry to build high-performance, scalable, and production-ready products." 
+    />
+    
+    <div class="intro-additional">
+      <p class="accent">Cutting-edge technology for ambitious projects.</p>
+    </div>
+
+    <div class="logo-bar">
+      <div class="logo-item"><Icon name="simple-icons:openai" class="icon" /> OpenAI</div>
+      <div class="logo-item"><Icon name="box" class="icon" /> Antigravity</div>
+      <div class="logo-item"><Icon name="simple-icons:astro" class="icon" /> Astro</div>
+      <div class="logo-item"><Icon name="simple-icons:vercel" class="icon" /> Vercel</div>
+      <div class="logo-item"><Icon name="simple-icons:supabase" class="icon" /> Supabase</div>
+      <div class="logo-item"><Icon name="simple-icons:github" class="icon" /> GitHub</div>
+      <div class="logo-item"><Icon name="simple-icons:anthropic" class="icon" /> Claude</div>
+      <div class="logo-item"><Icon name="waves" class="icon" /> Windsurf</div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .integrations-strip {
+    padding: 120px 0;
+    text-align: center;
+  }
+  .intro-additional {
+    margin: -30px auto 60px;
+  }
+  .intro-additional .accent {
+    color: #fff;
+    font-weight: 600;
+    font-size: 18px;
+  }
+  .logo-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    opacity: 0.7;
+  }
+  @media (max-width: 768px) {
+    .logo-bar {
+      gap: 24px 32px;
+    }
+  }
+  .logo-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    filter: grayscale(1) brightness(1.5);
+    transition: all 0.3s ease;
+  }
+  .logo-item:hover {
+    filter: grayscale(0) brightness(1);
+    opacity: 1;
+  }
+  .logo-item .icon {
+    width: 24px;
+    height: 24px;
+  }
+</style>

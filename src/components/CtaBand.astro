@@ -1,0 +1,49 @@
+---
+import Icon from './Icon.astro';
+---
+<section class="cta-band" id="contact">
+  <div class="cta-container">
+    <div class="cta-text">
+      <h2>Looking for someone who can actually build and ship?</h2>
+      <p>Let's turn your ideas into working products.</p>
+    </div>
+    <div class="cta-actions">
+      <a class="btn btn-primary" href="https://wa.me/543465430303" target="_blank" rel="noopener noreferrer">
+        <Icon name="lucide:message-circle" class="btn-icon" />
+        Let's talk on WhatsApp
+      </a>
+      <a class="btn btn-secondary" href="mailto:enzotrib@gmail.com">
+        <Icon name="lucide:mail" class="btn-icon" />
+        Send an email
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-container {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 30px;
+    align-items: center;
+  }
+  @media (max-width: 900px) {
+    .cta-container {
+      grid-template-columns: 1fr;
+      text-align: center;
+      justify-items: center;
+    }
+    .cta-actions {
+      flex-direction: column;
+      width: 100%;
+      gap: 12px;
+    }
+    .btn {
+      width: 100%;
+    }
+  }
+  .btn-icon {
+    width: 20px;
+    height: 20px;
+  }
+</style>

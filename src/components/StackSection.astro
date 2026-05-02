@@ -1,0 +1,95 @@
+---
+import Icon from './Icon.astro';
+import SectionHeading from './SectionHeading.astro';
+import MagicCard from './MagicCard.astro';
+
+const groups = [
+  {
+    title: '🤖 AI & VibeCoding',
+    items: [
+      ['cube', 'violet', 'Windsurf'],
+      ['monitor', 'violet', 'Codex / AI tools'],
+      ['bulb', 'blue', 'Prompt engineering'],
+      ['sparkle', 'blue', 'AI-assisted development workflows'],
+    ],
+  },
+  {
+    title: '☁️ Backend & Infra',
+    items: [
+      ['node', 'green', 'Node.js'],
+      ['bolt', 'green', 'APIs (REST / integrations)'],
+      ['bolt', 'cyan', 'Supabase'],
+      ['cloud', 'white', 'Cloud functions'],
+    ],
+  },
+  {
+    title: '🎨 Frontend',
+    items: [
+      ['triangle', 'orange', 'Astro'],
+      ['html', 'orange', 'HTML / CSS / JavaScript'],
+      ['waves', 'cyan', 'Tailwind'],
+      ['diamond', 'rose', 'Responsive UI systems'],
+    ],
+  },
+  {
+    title: '🧩 Integrations',
+    items: [
+      ['code', 'white', 'API connections'],
+      ['automation', 'white', 'Automation flows'],
+      ['webhook', 'white', 'Webhooks'],
+      ['target', 'blue', 'Third-party services'],
+    ],
+  },
+  {
+    title: '🗄️ Data',
+    items: [
+      ['database', 'white', 'SQL'],
+      ['database', 'white', 'Database design'],
+      ['database', 'white', 'Data modeling'],
+    ],
+  },
+  {
+    title: '🚀 Deployment',
+    items: [
+      ['triangle', 'white', 'Vercel'],
+      ['github', 'white', 'GitHub'],
+      ['branch', 'white', 'CI/CD workflows'],
+    ],
+  },
+];
+---
+
+<section class="section" id="stack">
+  <SectionHeading
+    titleStart="Tools I use to"
+    titleAccent="build"
+    text="Modern technologies and AI-first workflows for rapid development and scalable products."
+  />
+  <div class="tool-grid">
+    {groups.map((group) => (
+      <MagicCard class="glass-card">
+        <div class="card-inner">
+          <h3>{group.title}</h3>
+          <ul class="list">
+            {group.items.map(([icon, color, label]) => (
+              <li><span class:list={['mini-icon', color]}><Icon name={icon} class="" /></span>{label}</li>
+            ))}
+          </ul>
+        </div>
+      </MagicCard>
+    ))}
+  </div>
+</section>
+
+<style>
+  .card-inner {
+    padding: 26px 28px;
+    height: 100%;
+  }
+  .glass-card {
+    /* Override existing styles if necessary, but MagicCard handles the background and border */
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+</style>
