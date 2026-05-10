@@ -1,100 +1,130 @@
 ---
-import Icon from './Icon.astro';
-import SectionHeading from './SectionHeading.astro';
-import MagicCard from './MagicCard.astro';
-import orbyImage from '../assets/orby.webp';
-import picstreamsImage from '../assets/picstreams.webp';
-import translateImage from '../assets/traslate-app.webp';
-import arranzImage from '../assets/arranz-guitars.webp';
+import Icon from "./Icon.astro";
+import SectionHeading from "./SectionHeading.astro";
+import MagicCard from "./MagicCard.astro";
+import orbyImage from "../assets/orby.webp";
+import picstreamsImage from "../assets/picstreams.webp";
+import translateImage from "../assets/traslate-app.webp";
+import arranzImage from "../assets/arranz-guitars.webp";
 
 const builds = [
   {
-    title: 'Orby',
-    description: 'Agente interactivo de inteligencia artificial nativo de voz, con integración de herramientas y memoria persistente.',
+    title: "Orby",
+    description:
+      "Agente interactivo de inteligencia artificial nativo de voz, con integración de herramientas y memoria persistente.",
     image: orbyImage,
-    url: 'https://orby-ai.up.railway.app/',
-    badge: { text: 'Concept', type: 'concept' },
-    tags: ['AI Voice', 'Persistent Memory', 'Tool Use'],
+    url: "https://orby-dpgm.onrender.com/",
+    badge: { text: "Concept", type: "concept" },
+    tags: ["AI Voice", "Persistent Memory", "Tool Use"],
     meta: [
-      ['clock', '', 'Built in: 2 weeks'],
-      ['check', 'green', 'Outcome: Fully functional voice agent'],
+      ["clock", "", "Built in: 2 weeks"],
+      ["check", "green", "Outcome: Fully functional voice agent"],
     ],
   },
   {
-    title: 'PicStreams',
-    description: 'Aplicación para compartir selfies en tiempo real en pantallas gigantes de eventos, creando experiencias interactivas.',
+    title: "PicStreams",
+    description:
+      "Aplicación para compartir selfies en tiempo real en pantallas gigantes de eventos, creando experiencias interactivas.",
     image: picstreamsImage,
-    url: 'https://picstreams.com/',
-    badge: { text: 'Live', type: 'live' },
-    tags: ['Real-time', 'WebSockets', 'Events'],
+    url: "https://picstreams.com/",
+    badge: { text: "Live", type: "live" },
+    tags: ["Real-time", "WebSockets", "Events"],
     meta: [
-      ['sparkle', 'violet', 'Focus: Scale + Latency'],
-      ['diamond', 'blue', 'Production Ready'],
+      ["sparkle", "violet", "Focus: Scale + Latency"],
+      ["diamond", "blue", "Production Ready"],
     ],
   },
   {
-    title: 'Translate-app',
-    description: 'Traducción de audio y fotos en tiempo real con soporte para más de 48 idiomas y latencia mínima.',
+    title: "Translate-app",
+    description:
+      "Traducción de audio y fotos en tiempo real con soporte para más de 48 idiomas y latencia mínima.",
     image: translateImage,
-    url: '#',
-    badge: { text: 'Concept', type: 'concept' },
-    tags: ['Real-time Translation', 'Audio Processing', 'Computer Vision'],
+    url: "#",
+    badge: { text: "Concept", type: "concept" },
+    tags: ["Real-time Translation", "Audio Processing", "Computer Vision"],
     meta: [
-      ['sparkle', 'violet', 'Focus: Accuracy + Speed'],
-      ['clock', '', 'Built in: 3 weeks'],
+      ["sparkle", "violet", "Focus: Accuracy + Speed"],
+      ["clock", "", "Built in: 3 weeks"],
     ],
   },
   {
-    title: 'Arranz Guitars',
-    description: 'Landing page premium para Pablo Arranz, reconocido Luthier, con un diseño enfocado en el detalle y la artesanía.',
+    title: "Arranz Guitars",
+    description:
+      "Landing page premium para Pablo Arranz, reconocido Luthier, con un diseño enfocado en el detalle y la artesanía.",
     image: arranzImage,
-    url: 'https://arranz-guitars.vercel.app/',
-    badge: { text: 'In Progress', type: 'in-progress' },
-    tags: ['Astro', 'UI/UX', 'Performance'],
+    url: "https://arranz-guitars.vercel.app/",
+    badge: { text: "In Progress", type: "in-progress" },
+    tags: ["Astro", "UI/UX", "Performance"],
     meta: [
-      ['sparkle', 'violet', 'Focus: Aesthetic + SEO'],
-      ['check', 'green', 'Outcome: High-converting landing'],
+      ["sparkle", "violet", "Focus: Aesthetic + SEO"],
+      ["check", "green", "Outcome: High-converting landing"],
     ],
   },
 ];
 ---
 
 <section class="section builds" id="builds">
-  <SectionHeading titleStart="Selected" titleAccent="builds" text="Real projects. Real results." />
+  <SectionHeading
+    titleStart="Selected"
+    titleAccent="builds"
+    text="Real projects. Real results."
+  />
   <div class="build-grid">
-    {builds.map((build) => (
-      <MagicCard class="build-card-magic">
-        <a href={build.url || '#'} target="_blank" rel="noopener noreferrer" class="build-card-inner">
-          <div class="build-visual">
-            {build.image ? (
-              <div class="img-container">
-                <img src={build.image.src} alt={build.title} class="build-img" />
-                {build.badge && (
-                  <span class:list={['badge', build.badge.type]}>
-                    {(build.badge.type === 'live' || build.badge.type === 'in-progress') && <span class="dot"></span>}
-                    {build.badge.text}
-                  </span>
-                )}
-              </div>
-            ) : (
-              <div class:list={['mock', build.mockClass]} aria-hidden="true"></div>
-            )}
-          </div>
-          <div class="build-body">
-            <h3>{build.title}</h3>
-            <p>{build.description}</p>
-            <div class="tags">
-              {build.tags.map((tag) => <span class="tag">{tag}</span>)}
+    {
+      builds.map((build) => (
+        <MagicCard class="build-card-magic">
+          <a
+            href={build.url || "#"}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="build-card-inner"
+          >
+            <div class="build-visual">
+              {build.image ? (
+                <div class="img-container">
+                  <img
+                    src={build.image.src}
+                    alt={build.title}
+                    class="build-img"
+                  />
+                  {build.badge && (
+                    <span class:list={["badge", build.badge.type]}>
+                      {(build.badge.type === "live" ||
+                        build.badge.type === "in-progress") && (
+                        <span class="dot" />
+                      )}
+                      {build.badge.text}
+                    </span>
+                  )}
+                </div>
+              ) : (
+                <div
+                  class:list={["mock", build.mockClass]}
+                  aria-hidden="true"
+                />
+              )}
             </div>
-          </div>
-          <div class="build-meta">
-            {build.meta.map(([icon, color, label]) => (
-              <span class="meta-item"><Icon name={icon} class={`icon ${color}`} />{label}</span>
-            ))}
-          </div>
-        </a>
-      </MagicCard>
-    ))}
+            <div class="build-body">
+              <h3>{build.title}</h3>
+              <p>{build.description}</p>
+              <div class="tags">
+                {build.tags.map((tag) => (
+                  <span class="tag">{tag}</span>
+                ))}
+              </div>
+            </div>
+            <div class="build-meta">
+              {build.meta.map(([icon, color, label]) => (
+                <span class="meta-item">
+                  <Icon name={icon} class={`icon ${color}`} />
+                  {label}
+                </span>
+              ))}
+            </div>
+          </a>
+        </MagicCard>
+      ))
+    }
   </div>
 </section>
 
@@ -134,7 +164,7 @@ const builds = [
   .build-card-inner:hover .build-img {
     transform: scale(1.05);
   }
-  
+
   .badge {
     position: absolute;
     top: 10px;
@@ -150,13 +180,13 @@ const builds = [
     letter-spacing: 0.05em;
     backdrop-filter: blur(4px);
   }
-  
+
   .badge.concept {
     background: rgba(141, 92, 255, 0.25);
     color: #b592ff;
     border: 1px solid rgba(141, 92, 255, 0.3);
   }
-  
+
   .badge.live {
     background: rgba(59, 213, 132, 0.25);
     color: #3bd584;
@@ -168,7 +198,7 @@ const builds = [
     color: #ff8a5b;
     border: 1px solid rgba(255, 138, 91, 0.3);
   }
-  
+
   .dot {
     width: 6px;
     height: 6px;
@@ -177,11 +207,17 @@ const builds = [
     box-shadow: 0 0 10px currentColor;
     animation: pulse 2s infinite;
   }
-  
+
   @keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.4; }
-    100% { opacity: 1; }
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.4;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 
   .build-grid {
