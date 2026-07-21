@@ -2,68 +2,61 @@
 import Icon from './Icon.astro';
 import SectionHeading from './SectionHeading.astro';
 import MagicCard from './MagicCard.astro';
+import { ui } from '../i18n/ui';
+import { getLangFromUrl } from '../i18n/utils';
 
-const groups = [
-  {
-    title: '🤖 AI & VibeCoding',
-    items: [
-      ['cube', 'violet', 'Windsurf'],
-      ['monitor', 'violet', 'Codex / AI tools'],
-      ['bulb', 'blue', 'Prompt engineering'],
-      ['sparkle', 'blue', 'AI-assisted development workflows'],
-    ],
-  },
-  {
-    title: '☁️ Backend & Infra',
-    items: [
-      ['node', 'green', 'Node.js'],
-      ['bolt', 'green', 'APIs (REST / integrations)'],
-      ['bolt', 'cyan', 'Supabase'],
-      ['cloud', 'white', 'Cloud functions'],
-    ],
-  },
-  {
-    title: '🎨 Frontend',
-    items: [
-      ['triangle', 'orange', 'Astro'],
-      ['html', 'orange', 'HTML / CSS / JavaScript'],
-      ['waves', 'cyan', 'Tailwind'],
-      ['diamond', 'rose', 'Responsive UI systems'],
-    ],
-  },
-  {
-    title: '🧩 Integrations',
-    items: [
-      ['code', 'white', 'API connections'],
-      ['automation', 'white', 'Automation flows'],
-      ['webhook', 'white', 'Webhooks'],
-      ['target', 'blue', 'Third-party services'],
-    ],
-  },
-  {
-    title: '🗄️ Data',
-    items: [
-      ['database', 'white', 'SQL'],
-      ['database', 'white', 'Database design'],
-      ['database', 'white', 'Data modeling'],
-    ],
-  },
-  {
-    title: '🚀 Deployment',
-    items: [
-      ['triangle', 'white', 'Vercel'],
-      ['github', 'white', 'GitHub'],
-      ['branch', 'white', 'CI/CD workflows'],
-    ],
-  },
+const lang = getLangFromUrl(Astro.url);
+const t = ui[lang].stack;
+
+// Icon + color metadata stays fixed; only the label text is localized (from t.groups).
+const iconMeta = [
+  [
+    ['cube', 'violet'],
+    ['monitor', 'violet'],
+    ['bulb', 'blue'],
+    ['sparkle', 'blue'],
+  ],
+  [
+    ['node', 'green'],
+    ['bolt', 'green'],
+    ['bolt', 'cyan'],
+    ['cloud', 'white'],
+  ],
+  [
+    ['triangle', 'orange'],
+    ['html', 'orange'],
+    ['waves', 'cyan'],
+    ['diamond', 'rose'],
+  ],
+  [
+    ['code', 'white'],
+    ['automation', 'white'],
+    ['webhook', 'white'],
+    ['target', 'blue'],
+  ],
+  [
+    ['database', 'white'],
+    ['database', 'white'],
+    ['database', 'white'],
+  ],
+  [
+    ['triangle', 'white'],
+    ['github', 'white'],
+    ['branch', 'white'],
+  ],
 ];
+
+const groups = t.groups.map((group, i) => ({
+  title: group.title,
+  items: group.items.map((label, j) => [iconMeta[i][j][0], iconMeta[i][j][1], label]),
+}));
 ---
 
 <section class="section" id="stack">
   <SectionHeading
-    titleStart="Tools I use to"
-    titleAccent="build"
-    text="Modern technologies and AI-first workflows for rapid development and scalable products."
+    titleStart={t.titleStart}
+    titleAccent={t.titleAccent}
+    text={t.text}
   />
   <div class="tool-grid">
     {groups.map((group) => (

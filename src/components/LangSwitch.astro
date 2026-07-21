@@ -1,0 +1,48 @@
+---
+import { getLangFromUrl, getAltLang, getLocalizedPath } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const altLang = getAltLang(lang);
+const href = getLocalizedPath(altLang);
+const label = altLang === 'es' ? 'ES' : 'EN';
+const aria = altLang === 'es' ? 'Cambiar a español' : 'Switch to English';
+---
+
+<a
+  class="lang-switch"
+  href={href}
+  aria-label={aria}
+  onclick={`try{localStorage.setItem('preferredLang','${altLang}')}catch(e){}`}
+>
+  <svg viewBox="0 0 24 24" class="lang-icon" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="9" />
+    <path d="M2.5 12h19M12 2.7a15 15 0 0 1 4 9.3 15 15 0 0 1-4 9.3 15 15 0 0 1-4-9.3 15 15 0 0 1 4-9.3Z" />
+  </svg>
+  <span>{label}</span>
+</a>
+
+<style>
+  .lang-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 40px;
+    padding: 0 14px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: var(--surface-soft);
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 700;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .lang-switch:hover {
+    border-color: var(--line-hot);
+    background: var(--surface-card);
+  }
+  .lang-icon {
+    width: 16px;
+    height: 16px;
+    opacity: 0.85;
+  }
+</style>

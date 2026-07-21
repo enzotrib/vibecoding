@@ -1,19 +1,25 @@
 ---
 import BrandMark from './BrandMark.astro';
 import Icon from './Icon.astro';
+import { ui } from '../i18n/ui';
+import { getLangFromUrl, getLocalizedPath } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = ui[lang].footer;
+const tNav = ui[lang].nav;
 ---
 
 <footer class="footer page">
   <div>
-    <a class="brand" href="#" aria-label="VibeCoding home">
+    <a class="brand" href={getLocalizedPath(lang)} aria-label={tNav.brandAria}>
       <BrandMark />
       <span>VibeCoding</span>
     </a>
-    <p>AI-powered development.<br />Less. Scalable. Reliable.</p>
+    <p>{t.taglineLine1}<br />{t.taglineLine2}</p>
   </div>
-  
+
   <div>
-    <h3>Contact</h3>
+    <h3>{t.contact}</h3>
     <ul class="contact-list">
       <li>
         <a href="mailto:enzotrib@gmail.com">
@@ -31,7 +37,7 @@ import Icon from './Icon.astro';
   </div>
 
   <div>
-    <h3>Redes</h3>
+    <h3>{t.social}</h3>
     <ul class="contact-list">
       <li>
         <a href="https://www.linkedin.com/in/enzo-tribiani/" target="_blank" rel="noopener noreferrer">
@@ -53,8 +59,8 @@ import Icon from './Icon.astro';
       </li>
     </ul>
   </div>
-  
-  <div class="copyright">© 2026 VibeCoding. All rights reserved.</div>
+
+  <div class="copyright">{t.copyright}</div>
 </footer>
 
 <style>

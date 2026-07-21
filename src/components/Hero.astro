@@ -1,22 +1,27 @@
 ---
 import Icon from './Icon.astro';
 import heroImage from '../assets/hero-image.webp';
+import { ui } from '../i18n/ui';
+import { getLangFromUrl } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = ui[lang].hero;
 
 const stats = [
-  { icon: 'sparkle', title: 'AI-Native Workflow', text: 'Prototipado ultrarrápido', tone: 'orange' },
-  { icon: 'cube', title: 'Product Mindset', text: 'Enfoque en negocio real', tone: 'blue' },
-  { icon: 'bolt', title: 'Full-Stack Speed', text: 'Días, no meses', tone: 'violet' },
+  { icon: 'sparkle', title: t.stat1Title, text: t.stat1Text, tone: 'orange' },
+  { icon: 'cube', title: t.stat2Title, text: t.stat2Text, tone: 'blue' },
+  { icon: 'bolt', title: t.stat3Title, text: t.stat3Text, tone: 'violet' },
 ];
 ---
 
 <section class="hero" id="home">
   <div class="hero-content">
-    <div class="eyebrow"><span class="bolt-mini">◆</span> AI-powered developer</div>
-    <h1>I build <span class="gradient-text">AI-powered</span> products fast.</h1>
-    <p class="hero-copy">VibeCoding, automation and full-stack development to turn ideas into working products in days, not months.</p>
+    <div class="eyebrow"><span class="bolt-mini">◆</span> {t.eyebrow}</div>
+    <h1>{t.titleStart} <span class="gradient-text">{t.titleAccent}</span> {t.titleEnd}</h1>
+    <p class="hero-copy">{t.copy}</p>
     <div class="actions">
-      <a class="btn btn-primary" href="#builds">View my work</a>
-      <a class="btn btn-secondary" href="#contact">Get in touch <span aria-hidden="true">→</span></a>
+      <a class="btn btn-primary" href="#builds">{t.ctaPrimary}</a>
+      <a class="btn btn-secondary" href="#contact">{t.ctaSecondary} <span aria-hidden="true">→</span></a>
     </div>
     <div class="hero-stats" aria-label="Builder advantages">
       {stats.map((stat) => (

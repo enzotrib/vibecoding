@@ -6,68 +6,36 @@ import orbyImage from "../assets/orby.webp";
 import picstreamsImage from "../assets/picstreams.webp";
 import translateImage from "../assets/traslate-app.webp";
 import arranzImage from "../assets/arranz-guitars.webp";
+import { ui } from "../i18n/ui";
+import { getLangFromUrl } from "../i18n/utils";
 
-const builds = [
-  {
-    title: "Orby",
-    description:
-      "Agente interactivo de inteligencia artificial nativo de voz, con integración de herramientas y memoria persistente.",
-    image: orbyImage,
-    url: "https://orby-dpgm.onrender.com/",
-    badge: { text: "Concept", type: "concept" },
-    tags: ["AI Voice", "Persistent Memory", "Tool Use"],
-    meta: [
-      ["clock", "", "Built in: 2 weeks"],
-      ["check", "green", "Outcome: Fully functional voice agent"],
-    ],
-  },
-  {
-    title: "PicStreams",
-    description:
-      "Aplicación para compartir selfies en tiempo real en pantallas gigantes de eventos, creando experiencias interactivas.",
-    image: picstreamsImage,
-    url: "https://picstreams.com/",
-    badge: { text: "Live", type: "live" },
-    tags: ["Real-time", "WebSockets", "Events"],
-    meta: [
-      ["sparkle", "violet", "Focus: Scale + Latency"],
-      ["diamond", "blue", "Production Ready"],
-    ],
-  },
-  {
-    title: "Translate-app",
-    description:
-      "Traducción de audio y fotos en tiempo real con soporte para más de 48 idiomas y latencia mínima.",
-    image: translateImage,
-    url: "#",
-    badge: { text: "Concept", type: "concept" },
-    tags: ["Real-time Translation", "Audio Processing", "Computer Vision"],
-    meta: [
-      ["sparkle", "violet", "Focus: Accuracy + Speed"],
-      ["clock", "", "Built in: 3 weeks"],
-    ],
-  },
-  {
-    title: "Arranz Guitars",
-    description:
-      "Landing page premium para Pablo Arranz, reconocido Luthier, con un diseño enfocado en el detalle y la artesanía.",
-    image: arranzImage,
-    url: "https://arranz-guitars.vercel.app/",
-    badge: { text: "In Progress", type: "in-progress" },
-    tags: ["Astro", "UI/UX", "Performance"],
-    meta: [
-      ["sparkle", "violet", "Focus: Aesthetic + SEO"],
-      ["check", "green", "Outcome: High-converting landing"],
-    ],
-  },
+const lang = getLangFromUrl(Astro.url);
+const t = ui[lang].builds;
+
+// Images, URLs, badge color-coding, and meta icons stay fixed; only text is localized.
+const buildMeta = [
+  { image: orbyImage, url: "https://orby-dpgm.onrender.com/", badgeType: "concept", metaIcons: [["clock", ""], ["check", "green"]] },
+  { image: picstreamsImage, url: "https://picstreams.com/", badgeType: "live", metaIcons: [["sparkle", "violet"], ["diamond", "blue"]] },
+  { image: translateImage, url: "#", badgeType: "concept", metaIcons: [["sparkle", "violet"], ["clock", ""]] },
+  { image: arranzImage, url: "https://arranz-guitars.vercel.app/", badgeType: "in-progress", metaIcons: [["sparkle", "violet"], ["check", "green"]] },
 ];
+
+const builds = t.items.map((item, i) => ({
+  title: item.title,
+  description: item.description,
+  image: buildMeta[i].image,
+  url: buildMeta[i].url,
+  badge: { text: item.badge, type: buildMeta[i].badgeType },
+  tags: item.tags,
+  meta: item.meta.map((label, j) => [buildMeta[i].metaIcons[j][0], buildMeta[i].metaIcons[j][1], label]),
+}));
 ---
 
 <section class="section builds" id="builds">
   <SectionHeading
-    titleStart="Selected"
-    titleAccent="builds"
-    text="Real projects. Real results."
+    titleStart={t.titleStart}
+    titleAccent={t.titleAccent}
+    text={t.text}
   />
   <div class="build-grid">
     {
@@ -80,29 +48,22 @@ const builds = [
             class="build-card-inner"
           >
             <div class="build-visual">
-              {build.image ? (
-                <div class="img-container">
-                  <img
-                    src={build.image.src}
-                    alt={build.title}
-                    class="build-img"
-                  />
-                  {build.badge && (
-                    <span class:list={["badge", build.badge.type]}>
-                      {(build.badge.type === "live" ||
-                        build.badge.type === "in-progress") && (
-                        <span class="dot" />
-                      )}
-                      {build.badge.text}
-                    </span>
-                  )}
-                </div>
-              ) : (
-                <div
-                  class:list={["mock", build.mockClass]}
-                  aria-hidden="true"
+              <div class="img-container">
+                <img
+                  src={build.image.src}
+                  alt={build.title}
+                  class="build-img"
                 />
-              )}
+                {build.badge && (
+                  <span class:list={["badge", build.badge.type]}>
+                    {(build.badge.type === "live" ||
+                      build.badge.type === "in-progress") && (
+                      <span class="dot" />
+                    )}
+                    {build.badge.text}
+                  </span>
+                )}
+              </div>
             </div>
             <div class="build-body">
               <h3>{build.title}</h3>

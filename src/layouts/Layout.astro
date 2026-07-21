@@ -1,16 +1,19 @@
 ---
 import '../styles/global.css';
 import BackgroundGrid from '../components/BackgroundGrid.astro';
+import { ui } from '../i18n/ui';
+import { getLangFromUrl } from '../i18n/utils';
 
 interface Props {
 	title?: string;
 }
 
-const { title = 'VibeCoding - AI-powered product builder' } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const { title = ui[lang].meta.title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,8 +24,38 @@ const { title = 'VibeCoding - AI-powered product builder' } = Astro.props;
 			href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
 			rel="stylesheet"
 		/>
+		<link rel="alternate" hreflang="en" href="/" />
+		<link rel="alternate" hreflang="es" href="/es/" />
+		<link rel="alternate" hreflang="x-default" href="/" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		{lang === 'es' ? (
+			<script is:inline>
+				try {
+					localStorage.setItem('preferredLang', 'es');
+				} catch (e) {}
+			</script>
+		) : (
+			<script is:inline>
+				(function () {
+					try {
+						var stored = localStorage.getItem('preferredLang');
+						if (stored === 'es') {
+							location.replace('/es/');
+							return;
+						}
+						if (stored === 'en') return;
+						var nav = ((navigator.language || navigator.userLanguage || 'en') + '').toLowerCase();
+						if (nav.indexOf('es') === 0) {
+							localStorage.setItem('preferredLang', 'es');
+							location.replace('/es/');
+						} else {
+							localStorage.setItem('preferredLang', 'en');
+						}
+					} catch (e) {}
+				})();
+			</script>
+		)}
 	</head>
 	<body>
 		<BackgroundGrid />

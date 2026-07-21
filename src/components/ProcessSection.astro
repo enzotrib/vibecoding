@@ -1,34 +1,28 @@
 ---
 import SectionHeading from './SectionHeading.astro';
 import MagicCard from './MagicCard.astro';
+import { ui } from '../i18n/ui';
+import { getLangFromUrl } from '../i18n/utils';
 
-const cards = [
-  {
-    title: '⚡ Speed first',
-    text: 'MVPs in days, not months. Rapid iteration is the core of my workflow.',
-    icon: 'bolt',
-    color: 'orange',
-  },
-  {
-    title: '🧠 AI-native development',
-    text: 'I leverage AI tools to accelerate development, reduce friction, and explore more solutions faster.',
-    icon: 'brain',
-    color: 'violet',
-  },
-  {
-    title: '🔁 Iterative approach',
-    text: 'Build → test → improve. Continuous delivery mindset.',
-    icon: 'refresh',
-    color: 'blue',
-  },
-];
+const lang = getLangFromUrl(Astro.url);
+const t = ui[lang].process;
+
+const icons = ['bolt', 'brain', 'refresh'];
+const colors = ['orange', 'violet', 'blue'];
+
+const cards = t.cards.map((card, i) => ({
+  title: card.title,
+  text: card.text,
+  icon: icons[i],
+  color: colors[i],
+}));
 ---
 
 <section class="section process" id="process">
   <SectionHeading
-    titleStart="How I"
-    titleAccent="build"
-    text="My process is simple: move fast, build smart, iterate constantly."
+    titleStart={t.titleStart}
+    titleAccent={t.titleAccent}
+    text={t.text}
   />
   <div class="process-grid">
     {cards.map((card) => (

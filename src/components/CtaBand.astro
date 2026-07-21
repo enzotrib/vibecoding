@@ -1,20 +1,25 @@
 ---
 import Icon from './Icon.astro';
+import { ui } from '../i18n/ui';
+import { getLangFromUrl } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = ui[lang].cta;
 ---
 <section class="cta-band" id="contact">
   <div class="cta-container">
     <div class="cta-text">
-      <h2>Looking for someone who can actually build and ship?</h2>
-      <p>Let's turn your ideas into working products.</p>
+      <h2>{t.title}</h2>
+      <p>{t.text}</p>
     </div>
     <div class="cta-actions">
       <a class="btn btn-primary" href="https://wa.me/543465430303" target="_blank" rel="noopener noreferrer">
         <Icon name="lucide:message-circle" class="btn-icon" />
-        Let's talk on WhatsApp
+        {t.whatsapp}
       </a>
       <a class="btn btn-secondary" href="mailto:enzotrib@gmail.com">
         <Icon name="lucide:mail" class="btn-icon" />
-        Send an email
+        {t.email}
       </a>
     </div>
   </div>

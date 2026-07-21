@@ -1,18 +1,23 @@
 ---
 import Icon from './Icon.astro';
 import SectionHeading from './SectionHeading.astro';
+import { ui } from '../i18n/ui';
+import { getLangFromUrl } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = ui[lang].intro;
 ---
 
 <section class="section integrations-strip" id="integrations">
   <div class="container">
-    <SectionHeading 
-      titleStart="My development" 
-      titleAccent="ecosystem." 
-      text="I leverage the best tools in the industry to build high-performance, scalable, and production-ready products." 
+    <SectionHeading
+      titleStart={t.titleStart}
+      titleAccent={t.titleAccent}
+      text={t.text}
     />
-    
+
     <div class="intro-additional">
-      <p class="accent">Cutting-edge technology for ambitious projects.</p>
+      <p class="accent">{t.accent}</p>
     </div>
 
     <div class="logo-bar">

@@ -120,8 +120,14 @@ button {
   font-weight: 700;
 }
 
-.nav-cta {
+.nav-actions {
   justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav-cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;

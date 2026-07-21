@@ -1,17 +1,20 @@
 ---
 import Icon from './Icon.astro';
+import { ui } from '../i18n/ui';
+import { getLangFromUrl } from '../i18n/utils';
 
-const roles = [
-  ['sparkle', 'violet', 'AI Product Builder'],
-  ['bolt', 'orange', 'VibeCoding Developer'],
-  ['target', 'blue', 'Rapid Prototyping Engineer'],
-];
+const lang = getLangFromUrl(Astro.url);
+const t = ui[lang].mindset;
+
+const icons = ['sparkle', 'bolt', 'target'];
+const colors = ['violet', 'orange', 'blue'];
+const roles = t.roles.map((label, i) => [icons[i], colors[i], label]);
 ---
 
 <section class="mindset" id="about">
   <div>
-    <h2>Builder mindset</h2>
-    <p>I’m a developer focused on building real products, not just writing code. Over the past years, I’ve evolved from traditional web development into AI-powered product building (VibeCoding), combining speed, automation, and modern tooling.</p>
+    <h2>{t.title}</h2>
+    <p>{t.text}</p>
   </div>
   <div class="mindset-grid">
     {roles.map(([icon, color, label]) => (
